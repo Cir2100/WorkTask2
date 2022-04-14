@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WorkTask2</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="characters_fragment_label">Персонажи</string>
+    <string name="info_fragment_label">Подробная информация</string>
+
+</resources>

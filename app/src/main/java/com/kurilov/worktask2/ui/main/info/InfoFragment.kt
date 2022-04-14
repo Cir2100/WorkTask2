@@ -16,14 +16,12 @@ class InfoFragment : Fragment() {
 
     private var _binding: FragmentInfoBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentInfoBinding.inflate(inflater, container, false)
         return binding.root

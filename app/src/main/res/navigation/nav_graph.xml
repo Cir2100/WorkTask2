@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/CharatersFragment"
-        android:name="com.kurilov.worktask2.ui.main.characters.CharatersFragment"
+        android:name="com.kurilov.worktask2.ui.main.characters.CharactersFragment"
         android:label="@string/characters_fragment_label"
-        tools:layout="@layout/fragment_charaters">
+        tools:layout="@layout/fragment_characters">
 
         <action
             android:id="@+id/action_CharatersFragment_to_InfoFragment"

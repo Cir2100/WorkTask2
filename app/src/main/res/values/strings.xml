@@ -5,4 +5,7 @@
     <string name="characters_fragment_label">Персонажи</string>
     <string name="info_fragment_label">Подробная информация</string>
 
+    <string name="species_string">Раса: %1$s</string>
+    <string name="gender_string">Пол: %1$s</string>
+
 </resources>

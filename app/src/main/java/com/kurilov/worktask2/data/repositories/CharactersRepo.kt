@@ -4,7 +4,7 @@ import com.kurilov.worktask2.data.api.RetrofitBuilder
 
 object CharactersRepo {
 
-    private val charactersInternetLoader = CharactersInternetLoader
+    private val charactersInternetLoader = CharactersInternetLoader()
 
     suspend fun getAllCharacters() = charactersInternetLoader.getAllCharacters()
 

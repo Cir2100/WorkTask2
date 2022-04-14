@@ -39,7 +39,7 @@ class CharactersAdapter(
         holder.itemView.setOnClickListener{
             val pos = holder.adapterPosition
             if(pos != DiffUtil.DiffResult.NO_POSITION) {
-                listener.onClickItem(item)
+                listener.onClickItem(item.id)
             }
         }
 
@@ -88,6 +88,6 @@ class CharactersAdapter(
     }
 
     interface ActionClickListener {
-        fun onClickItem(item: Characther)
+        fun onClickItem(id: Int)
     }
 }

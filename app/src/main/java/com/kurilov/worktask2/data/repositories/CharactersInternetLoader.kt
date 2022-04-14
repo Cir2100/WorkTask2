@@ -23,21 +23,16 @@ class CharactersInternetLoader {
         }
     }
 
-
-
-
-    suspend fun getSingleCharacter(id : Int) {
-        withContext(Dispatchers.IO) {
-            try {
-                val response = apiService.getSingleCharacter(id)
-                if (response.isSuccessful) {
-                    return@withContext Result.Success(response.body()!!)
-                } else {
-                    return@withContext Result.Error(Exception(response.message()))
-                }
-            } catch (e: Exception) {
-                return@withContext Result.Error(e)
+    suspend fun getSingleCharacter(id : Int) : Result<Characther> {
+        return try {
+            val response = apiService.getSingleCharacter(id)
+            if (response.isSuccessful) {
+                Result.Success(response.body()!!)
+            } else {
+                Result.Error(Exception(response.message()))
             }
+        } catch (e: Exception) {
+            Result.Error(e)
         }
     }
 

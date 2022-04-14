@@ -1,13 +1,10 @@
 package com.kurilov.worktask2.ui.main.characters
 
-import android.opengl.Visibility
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kurilov.worktask2.R
 import com.kurilov.worktask2.data.classes.Characther
 import com.kurilov.worktask2.databinding.FragmentCharactersBinding
+import com.kurilov.worktask2.ui.main.info.InfoFragmentDirections
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -45,8 +43,9 @@ class CharactersFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         charactersAdapter = CharactersAdapter(object : CharactersAdapter.ActionClickListener {
-            override fun onClickItem(item: Characther) {
-                findNavController().navigate(R.id.action_CharatersFragment_to_InfoFragment)
+            override fun onClickItem(id : Int) {
+                val action = CharactersFragmentDirections.actionCharactersFragmentToInfoFragment(id)
+                findNavController().navigate(action)
             }
         })
     }

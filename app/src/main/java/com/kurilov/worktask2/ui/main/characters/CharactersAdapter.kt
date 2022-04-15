@@ -11,9 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kurilov.worktask2.R
 import com.kurilov.worktask2.data.classes.Characther
 import com.squareup.picasso.Picasso
+import androidx.recyclerview.widget.ListUpdateCallback
+
+
+
 
 class CharactersAdapter(
-    private val listener : ActionClickListener) :
+    private val listener : ActionListener) :
     RecyclerView.Adapter<CharactersAdapter.MyViewHolder>() {
 
     private var items : ArrayList<Characther> = arrayListOf()
@@ -37,21 +41,23 @@ class CharactersAdapter(
             .into(holder.characterImageView)
 
         holder.itemView.setOnClickListener{
-            val pos = holder.adapterPosition
+            val pos = holder.bindingAdapterPosition
             if(pos != DiffUtil.DiffResult.NO_POSITION) {
                 listener.onClickItem(item.id)
             }
         }
 
+        if(holder.bindingAdapterPosition == itemCount - 1) {
+            //isLoading = true;
+            listener.onLoadMore(items.last().id);
+        }
 
     }
 
-    fun updateItems(newItems: List<Characther>) {
-        val callback = CharactersDiffCallback(items, newItems)
-        val diffResult: DiffUtil.DiffResult = DiffUtil.calculateDiff(callback)
-        items.clear()
+    fun addItems(newItems: List<Characther>) {
+        val oldPos = items.lastIndex
         items.addAll(newItems)
-        diffResult.dispatchUpdatesTo(this)
+        notifyItemRangeInserted(oldPos, newItems.size)
     }
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -65,29 +71,9 @@ class CharactersAdapter(
 
     override fun getItemCount() = items.size
 
-    class CharactersDiffCallback(
-        private val oldCharacters: List<Characther>,
-        private val newCharacters: List<Characther>
-    ) :
-        DiffUtil.Callback() {
-            override fun getOldListSize(): Int {
-                return oldCharacters.size
-            }
-
-            override fun getNewListSize(): Int {
-                return newCharacters.size
-            }
-
-            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldCharacters[oldItemPosition].id == newCharacters[newItemPosition].id
-            }
-
-            override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-                return oldCharacters[oldItemPosition].status == newCharacters[newItemPosition].status
-        }
-    }
-
-    interface ActionClickListener {
+    interface ActionListener {
         fun onClickItem(id: Int)
+
+        fun onLoadMore(id: Int)
     }
 }

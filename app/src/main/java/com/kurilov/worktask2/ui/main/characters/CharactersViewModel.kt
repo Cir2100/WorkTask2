@@ -23,10 +23,10 @@ class CharactersViewModel : ViewModel() {
     val error: LiveData<String> = _error
 
 
-    fun getCharacters() {
+    fun loadCharacters(lastId : Int) {
         viewModelScope.launch {
             _dataLoading.postValue(true)
-            when (val charactersResult = charactersRepo.getAllCharacters()) {
+            when (val charactersResult = charactersRepo.getListCharacters(lastId + 1)) {
                 is Result.Success -> {
                     _characters.value = charactersResult.data!!
                     _dataLoading.postValue(false)

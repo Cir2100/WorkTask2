@@ -12,6 +12,9 @@ interface ApiService {
     suspend fun getAllCharacters() : Response<AllCharactersResult>
 
     @GET("character/{characterId}")
-    suspend fun getSingleCharacter(@Path("characterId") characterId: Int) : Response<Characther>
+    suspend fun getSingleCharacters(@Path("characterId") characterId: Int) : Response<Characther>
+
+    @GET("character/{characterId}")
+    suspend fun getListCharacters(@Path("characterId") characterId: List<Int>) : Response<List<Characther>>
 
 }

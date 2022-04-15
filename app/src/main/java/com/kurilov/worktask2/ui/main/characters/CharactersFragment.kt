@@ -1,6 +1,7 @@
 package com.kurilov.worktask2.ui.main.characters
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,10 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.kurilov.worktask2.R
-import com.kurilov.worktask2.data.classes.Characther
 import com.kurilov.worktask2.databinding.FragmentCharactersBinding
-import com.kurilov.worktask2.ui.main.info.InfoFragmentDirections
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -42,18 +40,24 @@ class CharactersFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        charactersAdapter = CharactersAdapter(object : CharactersAdapter.ActionClickListener {
+
+        charactersAdapter = CharactersAdapter(object : CharactersAdapter.ActionListener {
             override fun onClickItem(id : Int) {
                 val action = CharactersFragmentDirections.actionCharactersFragmentToInfoFragment(id)
                 findNavController().navigate(action)
             }
+
+            override fun onLoadMore(id : Int) {
+                viewModel.loadCharacters(id)
+            }
         })
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupUI()
-        viewModel.getCharacters()
+        viewModel.loadCharacters(0)
     }
 
     override fun onDestroyView() {
@@ -67,6 +71,7 @@ class CharactersFragment : Fragment() {
 
             charactersRecyclerView.layoutManager = LinearLayoutManager(activity)
             charactersRecyclerView.adapter = charactersAdapter
+            //charactersRecyclerView.scrollToPosition()
 
             viewModel.dataLoading.observe(viewLifecycleOwner) { loading ->
                 if (loading) {
@@ -80,7 +85,7 @@ class CharactersFragment : Fragment() {
             }
 
             viewModel.characters.observe(viewLifecycleOwner, {
-                charactersAdapter.updateItems(it)
+                charactersAdapter.addItems(it)
             })
 
             viewModel.error.observe(viewLifecycleOwner, {

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.info.InfoFragment">
+    tools:context=".ui.main.info.InfoFragment"
+    android:padding="5dp">
 
 
     <ImageView
@@ -28,7 +29,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginStart="5dp"
         android:gravity="center_vertical"
         app:layout_constraintStart_toStartOf="@id/character_info_name"
         app:layout_constraintTop_toBottomOf="@id/character_info_name"/>
@@ -38,7 +38,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginStart="5dp"
         android:gravity="center_vertical"
         app:layout_constraintStart_toStartOf="@id/character_info_name"
         app:layout_constraintTop_toBottomOf="@id/character_info_species" />
@@ -48,7 +47,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginStart="5dp"
         android:gravity="center_vertical"
         app:layout_constraintStart_toStartOf="@id/character_info_name"
         app:layout_constraintTop_toBottomOf="@id/character_info_gender" />
@@ -58,10 +56,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginStart="5dp"
         android:gravity="center_vertical"
         app:layout_constraintStart_toStartOf="@id/character_info_name"
         app:layout_constraintTop_toBottomOf="@id/character_info_status" />
+
+    <TextView
+        android:id="@+id/character_info_last_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="@id/character_info_image_view"
+        app:layout_constraintTop_toBottomOf="@id/character_info_image_view" />
+
 
     <ProgressBar
         android:id="@+id/progressBar"

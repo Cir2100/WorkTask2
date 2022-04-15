@@ -7,5 +7,8 @@
 
     <string name="species_string">Раса: %1$s</string>
     <string name="gender_string">Пол: %1$s</string>
+    <string name="status_string">Статус: %1$s</string>
+    <string name="episodes_string">Количество эпизодов: %1$s</string>
+    <string name="location_string">Последнее местоположение: %1$s</string>
 
 </resources>

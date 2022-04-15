@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.kurilov.worktask2.R
 import com.kurilov.worktask2.databinding.FragmentInfoBinding
 import com.squareup.picasso.Picasso
 
@@ -58,6 +59,7 @@ class InfoFragment : Fragment() {
                     characterInfoName.visibility = View.INVISIBLE
                     characterInfoSpecies.visibility = View.INVISIBLE
                     characterInfoStatus.visibility = View.INVISIBLE
+                    characterInfoLastLocation.visibility = View.INVISIBLE
                 }
                 else {
                     progressBar.visibility = View.INVISIBLE
@@ -67,16 +69,18 @@ class InfoFragment : Fragment() {
                     characterInfoName.visibility = View.VISIBLE
                     characterInfoSpecies.visibility = View.VISIBLE
                     characterInfoStatus.visibility = View.VISIBLE
+                    characterInfoLastLocation.visibility = View.VISIBLE
                 }
             }
 
             viewModel.character.observe(viewLifecycleOwner, {
                 it?.let { ch ->
                     characterInfoName.text = ch.name
-                    characterInfoSpecies.text = ch.species
-                    characterInfoStatus.text = ch.status
-                    characterInfoGender.text = ch.gender
-                    characterInfoEpisodes.text = ch.episode.size.toString()
+                    characterInfoSpecies.text = getString(R.string.species_string, ch.species)
+                    characterInfoStatus.text =  getString(R.string.status_string, ch.status)
+                    characterInfoGender.text = getString(R.string.gender_string, ch.gender)
+                    characterInfoEpisodes.text = getString(R.string.episodes_string, ch.episode.size.toString())
+                    characterInfoLastLocation.text = getString(R.string.location_string, ch.location.name)
 
                     Picasso.get()
                         .load(ch.image)

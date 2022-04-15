@@ -32,14 +32,17 @@ class CharactersFragment : Fragment() {
     ): View {
 
         _binding = FragmentCharactersBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this)
-            .get(CharactersViewModel::class.java)
+
         return binding.root
 
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        viewModel = ViewModelProvider(this)
+            .get(CharactersViewModel::class.java)
+        viewModel.loadCharacters(1)
 
         charactersAdapter = CharactersAdapter(object : CharactersAdapter.ActionListener {
             override fun onClickItem(id : Int) {
@@ -57,7 +60,6 @@ class CharactersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupUI()
-        viewModel.loadCharacters(0)
     }
 
     override fun onDestroyView() {
@@ -71,7 +73,6 @@ class CharactersFragment : Fragment() {
 
             charactersRecyclerView.layoutManager = LinearLayoutManager(activity)
             charactersRecyclerView.adapter = charactersAdapter
-            //charactersRecyclerView.scrollToPosition()
 
             viewModel.dataLoading.observe(viewLifecycleOwner) { loading ->
                 if (loading) {

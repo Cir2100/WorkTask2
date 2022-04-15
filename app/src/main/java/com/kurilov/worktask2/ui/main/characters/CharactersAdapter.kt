@@ -49,7 +49,7 @@ class CharactersAdapter(
 
         if(holder.bindingAdapterPosition == itemCount - 1) {
             //isLoading = true;
-            listener.onLoadMore(items.last().id);
+            listener.onLoadMore(items.last().id)
         }
 
     }

@@ -51,7 +51,7 @@ class CharactersInternetLoader {
 
     private suspend fun getMoreCharacters(startId: Int): Result<List<Characther>>  {
         return try {
-            val ids : List<Int> = (startId..min(startId+20, maxId)).toList()
+            val ids : List<Int> = (startId..min(startId+19, maxId)).toList()
             val response = apiService.getListCharacters(ids)
             if (response.isSuccessful) {
                 Result.Success(response.body()!!)
